@@ -11,7 +11,6 @@
 class FileMonitor : public Observable<FileObserver> {
 public:
     FileMonitor(const char* fileName);
- 
     void checkFile();
  
 private:

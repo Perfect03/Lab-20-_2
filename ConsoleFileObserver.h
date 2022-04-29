@@ -31,7 +31,4 @@ void ConsoleFileObserver::fileStatus(const FileAbout& state) { // ф-я для 1
     else std::cout << "File is empty";
 }
 
-ConsoleFileObserver::~ConsoleFileObserver() {
-}
-
 #endif

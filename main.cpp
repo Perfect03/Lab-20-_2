@@ -12,7 +12,7 @@ int main() {
     FileMonitor monitor( "C:/Users/User/Documents/Lab-20-_2/build-GT_1-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/file.txt" );
     ConsoleFileObserver observer;
     monitor.registerObserver( &observer );
- 
+
     //monitor.checkFile(); // для 1-й ситуации из условия задания - она возможна только в самом начале наблюдения.
 
     // остальные ситуации подразумевают собой изменения файла, за которыми "наблюдатель" и должен наблюдать.
