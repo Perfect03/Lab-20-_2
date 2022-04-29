@@ -4,13 +4,13 @@
 #include <set>
 #include <vector>
 
-template<class FileObserver>
+template<class FileObserver> // определение шаблонного класса наблюдателя
 class Observable {
 public:
     virtual ~Observable() {
     }
 
-    void registerObserver(FileObserver* observer) {
+    void registerObserver(FileObserver* observer) { // функция для создания связи с наблюдателями
         if(m_count != 0) {
             m_requests.push_back(ObserverRequest { &Observable<FileObserver>::registerObserver, observer } );
         } else if(observer) {
@@ -18,7 +18,7 @@ public:
         }
     }
 
-    void unregisterObserver(FileObserver* observer) {
+    void unregisterObserver(FileObserver* observer) { // для прекращения связи с наблюдателями
         if( m_count != 0 ) {
             m_requests.push_back( ObserverRequest { &Observable< FileObserver >::unregisterObserver, observer } );
         } else if(observer) {
@@ -31,7 +31,7 @@ protected:
     }
 
     template< typename F, typename... Args >
-    void notifyObservers(F f, Args... args) {
+    void notifyObservers(F f, Args... args) { // функция для уведомления всех наблюдателей (их число произвольное)
         ++m_count;
         for(FileObserver* o : m_observers) {
             (o->*f)(args...);
@@ -46,14 +46,14 @@ protected:
     }
 
 private:
-    struct ObserverRequest {
+    struct ObserverRequest { // структура хранения самих запросов
         void (Observable<FileObserver>::*operation)(FileObserver*);
         FileObserver* observer;
     };
 
-    std::set<FileObserver*> m_observers;
-    int m_count;
-    std::vector<ObserverRequest> m_requests;
+    std::set<FileObserver*> m_observers; // используем структуру "множество", чтобы предотвратить создание дублирующих связей
+    int m_count; // счётчик для возможного предотвращения добавления/удаления наблюдателей
+    std::vector<ObserverRequest> m_requests; // здесь храним все запросы на добавление наблюдателя
 };
 
 #endif // OBSERVABLE_H
