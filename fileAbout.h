@@ -3,7 +3,7 @@
 
 #include <cstddef>
 struct FileAbout {
-    bool operator!= (const FileAbout& other) 
+    bool operator!= (const FileAbout& other)
     {
         if(this == &other) return false;
         return exists != other.exists || size != other.size;

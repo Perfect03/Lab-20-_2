@@ -7,11 +7,11 @@
 class ConsoleFileObserver : public FileObserver {
 public:
     ~ConsoleFileObserver();
- 
+
     void onFileChanged(const FileAbout& state);
     void fileStatus(const FileAbout& state);
 };
- 
+
 void ConsoleFileObserver::onFileChanged(const FileAbout& state) { // ф-я для 2-3 ситуаций, когда файл изменен
     std::cout << std::endl << std::endl << std::endl;
     std::cout << "FILE WAS CHANGED" << std::endl;
@@ -29,6 +29,9 @@ void ConsoleFileObserver::fileStatus(const FileAbout& state) { // ф-я для 1
     }
     else if (state.exists==0) std::cout << "File does not exists. ";
     else std::cout << "File is empty";
+}
+
+ConsoleFileObserver::~ConsoleFileObserver() {
 }
 
 #endif
