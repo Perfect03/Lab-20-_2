@@ -5,6 +5,8 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <QString>
+#include <QStringList>
 
 #include <sys/stat.h>
 
@@ -43,5 +45,10 @@ FileAbout FileMonitor::getFileAbout(const std::string& fileName) {
     struct stat statBuf;
     fileAbout.exists = stat(fileName.c_str(), &statBuf) == 0; // здесь мы узнаём непосредственно о состоянии файла, используя библиотеку stat
     fileAbout.size = fileAbout.exists ? statBuf.st_size : 0;
+
+    QString path = QString::fromStdString(fileName);
+    QStringList parts = path.split("/");
+    const char* name = parts.at(parts.size()-1).toStdString().c_str();
+    fileAbout.name=name;
     return fileAbout;
 }

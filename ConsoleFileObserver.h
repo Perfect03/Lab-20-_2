@@ -16,7 +16,7 @@ public:
 
 void ConsoleFileObserver::onFileChanged(const FileAbout& state) { // эта функция нужна для 2-3 ситуаций из условия задания, когда файл изменен
     std::cout << std::endl << std::endl << std::endl;
-    std::cout << "FILE WAS CHANGED" << std::endl;
+    std::cout << "FILE " << state.name << " WAS CHANGED" << std::endl;
     std::cout << "Exists: " << ((state.exists==1)?"Yes":"No") << std::endl;
     std::cout << "Size: " << state.size << std::endl; // выводится информация о файле и уведомление, что файл изменён
     std::cout << std::endl << std::endl;
@@ -25,12 +25,12 @@ void ConsoleFileObserver::onFileChanged(const FileAbout& state) { // эта фу
 void ConsoleFileObserver::fileStatus(const FileAbout& state) { // функция для 1-й ситуации, когда файл не изменялся
     std::cout << std::endl << std::endl << std::endl;
     if(state.size !=0 && state.exists ==1) {
-    std::cout << "File exists and not empty. " << std::endl ;
+    std::cout << "File " << state.name << " exists and not empty. " << std::endl ;
     std::cout << "Size: " << state.size << std::endl; // выводится информация о файле и надпись, что он существует и не пуст (согласно условию)
     std::cout << std::endl << std::endl;
     }
-    else if (state.exists==0) std::cout << "File does not exists. ";
-    else std::cout << "File is empty";
+    else if (state.exists==0) std::cout << "File " << state.name << " does not exists. ";
+    else std::cout << "File " << state.name << " is empty";
 }
 
 ConsoleFileObserver::~ConsoleFileObserver() {
